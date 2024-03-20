@@ -18,7 +18,7 @@ odoo.define("web_edit_user_filter/static/src/js/backend.js", function (require) 
     };
 
     patch(
-        components.ControlPanelModelExtension,
+        components.ControlPanelModelExtension.prototype,
         "web_edit_user_filter/static/src/js/backend.js",
         {
             _favoriteToIrFilter(favorite) {
@@ -46,7 +46,7 @@ odoo.define("web_edit_user_filter/static/src/js/backend.js", function (require) 
     );
 
     patch(
-        components.CustomFavoriteItem,
+        components.CustomFavoriteItem.prototype,
         "web_edit_user_filter/static/src/js/backend.js",
         {
             // ---------------------------------------------------------------------
@@ -54,9 +54,11 @@ odoo.define("web_edit_user_filter/static/src/js/backend.js", function (require) 
             // ---------------------------------------------------------------------
 
             /**
+             * FIXME DRY addons/web/static/src/search/favorite_menu/custom_favorite_item.js
+             * @override
              * @private
              */
-            _saveFavorite() {
+            saveFavorite() {
                 if (!this.state.description.length) {
                     this.env.services.notification.notify({
                         message: this.env._t(
@@ -77,6 +79,7 @@ odoo.define("web_edit_user_filter/static/src/js/backend.js", function (require) 
                     });
                     return this.descriptionRef.el.focus();
                 }
+                // HACK This is the only difference
                 var facets = this.model.get("facets");
                 this.model.dispatch("createNewFavorite", {
                     type: "favorite",
@@ -96,7 +99,7 @@ odoo.define("web_edit_user_filter/static/src/js/backend.js", function (require) 
         }
     );
 
-    patch(components.SearchBar, "web_edit_user_filter/static/src/js/backend.js", {
+    patch(components.SearchBar.prototype, "web_edit_user_filter/static/src/js/backend.js", {
         mounted() {
             var self = this;
             this._super(...arguments);
