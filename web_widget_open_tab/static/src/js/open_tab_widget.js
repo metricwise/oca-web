@@ -24,7 +24,7 @@ export class OpenTabWidget extends Component {
         return url.split("#")[0] + "#" + searchParams.toString();
     }
     loadAttrs(ev) {
-        $(ev.target).tooltip();
+        // $(ev.target).tooltip(); FIXME
     }
 }
 

@@ -17,7 +17,7 @@
     "assets": {
         "web.assets_backend": [
             "web_widget_open_tab/static/src/xml/open_tab_widget.xml",
-            "web_widget_open_tab/static/src/js/open_tab_widget.esm.js",
+            "web_widget_open_tab/static/src/js/open_tab_widget.js",
         ],
     },
 }
